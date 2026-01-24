@@ -74,7 +74,7 @@ The system operates logically in the following states:
 
 ## BLOCK DIAGRAM
 
------------The block diagram for Digital CLock is given below
+The block diagram for Digital CLock is given below
 
 <img width="1920" height="1080" alt="digital clock flow diagram" src="https://github.com/user-attachments/assets/9490952f-f022-4144-867b-44e0c8d3cc7b" />
 

@@ -15,8 +15,9 @@ The design follows **synchronous digital design principles**, ensures reliable b
 - [Features](https://github.com/SiliconWorks/DIGITAL-CLOCK/blob/main/README.md#features)
   
 - [Tools and Hardware](https://github.com/SiliconWorks/DIGITAL-CLOCK/blob/main/README.md#tools-and-hardware)  
-- [Block Diagram](https://github.com/SiliconWorks/DIGITAL-CLOCK/blob/main/README.md#block-diagram)  
-- Clock Operating Modes  
+- [Block Diagram](https://github.com/SiliconWorks/DIGITAL-CLOCK/blob/main/README.md#block-diagram)
+  
+- [Clock Operating Modes](https://github.com/SiliconWorks/DIGITAL-CLOCK/blob/main/README.md#clock-operating-modes)  
 - Time-Set State Machine  
 - Alarm & Snooze Operation  
 - Timing Table  

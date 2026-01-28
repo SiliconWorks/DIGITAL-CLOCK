@@ -159,9 +159,14 @@ The below block diagrma describes about the workflow of Digital Clock
 ---
 
 ## Contributors
-- [**Velmurugan R** – Bannari Amman Institute of Technology](linkedin.com/in/velmurugan-r-43b0b2355) 
-- [**Harish P** -  Bannari Amman Institute of Technology](linkedin.com/in/harish-p-493476355)
-- [**Durai Murugan M** - Bannari Amman Institute of Technology](linkedin.com/in/durai-murugan-859b67354) 
+- [**Velmurugan R** – Bannari Amman Institute of Technology] [LinkedIn link](https://www.linkedin.com/in/velmurugan-r-43b0b2355)
+
+- 
+- [**Harish P** -  Bannari Amman Institute of Technology] [LinkedIn link](https://www.linkedin.com/in/harish-p-493476355)
+
+- 
+- [**Durai Murugan M** - Bannari Amman Institute of Technology] [LinkedIn link](https://www.linkedin.com/in/durai-murugan-859b67354)
+ 
 - [**Vasan T**  - Bannari Amman Institute of Technology] [LinkedIn link](https://www.linkedin.com/in/vasan-t-7225x)
 
 ---

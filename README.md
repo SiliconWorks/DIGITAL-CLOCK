@@ -24,8 +24,6 @@ The design follows **synchronous digital design principles**, ensures reliable b
   
 - [Alarm & Snooze Operation](https://github.com/SiliconWorks/DIGITAL-CLOCK/blob/main/README.md#alarm--snooze-operation)
     
-- [Timing Table](https://github.com/SiliconWorks/DIGITAL-CLOCK/blob/main/README.md#timing-table-example)
-    
 - [Verilog Implementation](https://github.com/SiliconWorks/DIGITAL-CLOCK/blob/main/README.md#verilog-implementation)
    
 - [OLED Display Interface](https://github.com/SiliconWorks/DIGITAL-CLOCK/blob/main/README.md#oled-display-interface)
@@ -126,17 +124,6 @@ The below block diagrma describes about the workflow of Digital Clock
 ### Alarm Reset
 - Immediately stops alarm and snooze mode  
 
----
-
-## Timing Table (Example)
-
-| Time      | Event           | State   |
-|-----------|-----------------|---------|
-| 00:00:59 | Clock running   | Normal  |
-| 00:01:00 | Alarm triggers  | Alarm   |
-| 00:01:10 | Snooze pressed  | Snooze  |
-| 00:01:40 | Snooze alarm    | Alarm   |
-| Reset    | Alarm cleared   | Normal  |
 
 ---
 

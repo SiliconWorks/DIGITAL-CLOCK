@@ -1,5 +1,7 @@
 `timescale 1ns / 1ps
 
+
+
 module spiControl(
 input  clock, //On-board Zynq clock (100 MHz)
 input  reset,

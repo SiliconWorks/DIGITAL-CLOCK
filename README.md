@@ -1,217 +1,184 @@
-# FPGA Digital Clock with Alarm and Snooze (OLED Display)
+# ⏰ FPGA Real-Time Digital Clock with Alarm & Snooze (OLED Display)
 
-## PROJECT OVERVIEW
-This project implements a **real-time Digital Clock with Alarm and Snooze functionality** using an FPGA (Zynq-7000 ZedBoard) and an **SSD1306 OLED display** interfaced via SPI. The system displays the current time in **HH:MM:SS format** and generates an alarm using a **blinking LED and an active buzzer** at a preset time. A snooze feature allows the user to delay the alarm by exactly **30 seconds**.
+## Project Overview
+This project implements a **Real-Time Digital Clock with Alarm and Snooze functionality** using **Verilog HDL** on an FPGA platform.  
+The system displays **HH:MM:SS** on an **OLED display**, supports **manual time setting**, and provides an **alarm with an exact 30-second snooze feature**.
 
-The entire system is designed using **Verilog HDL**, operates on a **100 MHz system clock**, and demonstrates a complete real-time embedded system on FPGA.
-
----
-
-## PROBLEM STATEMENT
-In embedded digital systems, real-time timekeeping and alarm functionality are common requirements. Implementing such a system on FPGA requires accurate clock division, proper state-based control, and reliable peripheral interfacing.
-
-This project addresses the problem by designing:
-- A 1 Hz real-time clock from a 100 MHz FPGA clock
-- A CDC-safe button interface using synchronizers
-- An OLED display controller using SPI
-- Alarm and snooze logic with precise timing
+The design follows **synchronous digital design principles**, ensures reliable button handling through **synchronization logic**, and maintains stable OLED output without display corruption. The project has been verified on real hardware.
 
 ---
 
-## INPUTS AND OUTPUTS
-
-### Inputs
-- `clock` : 100 MHz system clock  
-- `reset` : Global system reset  
-- `alarm_reset_btn` : Stops alarm completely  
-- `snooze_btn` : Activates snooze mode  
-
-### Outputs
-- `alarm_led` : Blinking LED during alarm  
-- `buzzer` : Active buzzer output  
-- OLED Interface:
-  - `oled_spi_clk`
-  - `oled_spi_data`
-  - `oled_dc_n`
-  - `oled_reset_n`
-  - `oled_vdd`
-  - `oled_vbat`
+## Table of Contents
+- Problem Statement  
+- Features  
+- Tools and Hardware  
+- Block Diagram  
+- Clock Operating Modes  
+- Time-Set State Machine  
+- Alarm & Snooze Operation  
+- Timing Table  
+- Verilog Implementation  
+- OLED Display Interface  
+- Testing & Verification  
+- File Structure  
+- Contributors  
+- Conclusion  
 
 ---
 
-## SYSTEM STATES
+## Problem Statement
+FPGA-based real-time clock systems require precise timing generation, safe user interaction, and stable display control. Challenges include:
 
-The system operates logically in the following states:
+- Generating an accurate 1-second clock from a high-frequency system clock  
+- Preventing metastability from mechanical push buttons  
+- Safely modifying time without disrupting clock operation  
+- Implementing alarm and snooze functionality reliably  
+- Maintaining stable OLED display output  
 
-### NORMAL
-- Clock runs continuously
-- OLED displays current time
-- LED and buzzer are OFF
-
-### ALARM
-- Triggered when current time equals alarm time
-- LED blinks at 1 Hz
-- Buzzer beeps at 1 Hz
-
-### SNOOZE
-- Activated when snooze button is pressed
-- Alarm stops immediately
-- Alarm re-triggers after 30 seconds
+This project solves these challenges using structured Verilog design, synchronized control signals, and clean modular architecture.
 
 ---
 
-## FEATURES
-- Real-time digital clock (24-hour format)
-- OLED display via SPI (SSD1306 compatible)
-- Alarm at fixed preset time (00:01:00)
-- Blinking LED indication
-- Active buzzer alarm sound (1 sec ON / 1 sec OFF)
-- Snooze function (+30 seconds)
-- Alarm reset button
-- Fully synchronous single-clock design
+## Features
+- Accurate **1-second timing** derived from a 100 MHz system clock  
+- Displays real-time **HH:MM:SS** on OLED  
+- **Manual time setting** using hardware buttons  
+- Freeze-and-set mechanism for safe time adjustment  
+- Increment-by-one hour and minute control  
+- **Alarm function** at preset time  
+- **Snooze function** with exact 30-second delay  
+- Button synchronizers to avoid metastability  
+- Stable OLED output without flicker or corruption  
+- Fully synthesizable and hardware-tested  
 
 ---
 
-## BLOCK DIAGRAM
-
-The block diagram for Digital CLock is given below
-
-<img width="1920" height="1080" alt="digital clock flow diagram" src="https://github.com/user-attachments/assets/9490952f-f022-4144-867b-44e0c8d3cc7b" />
-
-
-## DESIGN ARCHITECTURE
-
-The system is divided into the following functional blocks:
-
-### 1. Time Generator Block
-- Divides 100 MHz clock into 1 Hz pulse
-- Maintains seconds, minutes, and hours in BCD format
-
-### 2. Alarm Comparator Block
-- Compares current time with preset alarm time
-- Generates alarm trigger signal
-
-### 3. Snooze Controller Block
-- Stores snooze target time
-- Adds exactly 30 seconds to current time
-- Triggers alarm again after snooze delay
-
-### 4. Alarm Output Block
-- Blinks LED at 1 Hz
-- Drives active buzzer
-- Both driven by same control signal
-
-### 5. OLED Display Block
-- Converts BCD to ASCII
-- Sends characters using SPI FSM
-- Displays HH:MM:SS continuously
+## Tools and Hardware
+- **FPGA Board:** ZedBoard (Zynq-7000)  
+- **HDL Language:** Verilog HDL  
+- **Design Tool:** AMD Vivado 2024  
+- **Display:** OLED (SPI interface)  
+- **Verification:** On-board FPGA testing  
 
 ---
 
-## OPERATIONAL PRINCIPLE
+## Block Diagram
+The system consists of the following major functional blocks:
 
-### On Every Second (1 Hz)
-- Time registers update
-- Display string is refreshed
-- Alarm comparison is evaluated
-
-### When Alarm Triggers
-- `alarm_on` becomes HIGH
-- LED and buzzer blink at 1 Hz
-
-### When Snooze is Pressed
-- Alarm stops immediately
-- Snooze target time is calculated (+30 seconds)
-- Alarm re-triggers at snooze time
+- Clock Divider (100 MHz → 1 Hz)  
+- Time Counter (HH:MM:SS)  
+- Button Synchronizer Block  
+- Time-Set Controller  
+- Alarm & Snooze Controller  
+- OLED Interface FSM  
 
 ---
 
-## HARDWARE AND TOOLS
+## Clock Operating Modes
 
-### Hardware
-- FPGA Board: ZedBoard (Zynq-7000)
-- OLED Display: SSD1306 (128x32, SPI)
-- Active Buzzer
-- LED + 330Ω resistor
-- Push buttons
+### Normal Mode
+- Clock runs automatically  
+- Time increments every second  
+- Alarm monitoring active  
 
-### Software
-- HDL Tool: AMD Vivado 2024
-- Language: Verilog HDL
-- Simulator: Vivado Simulator
+### Set Mode – Hours
+- Clock is frozen  
+- Hour value increments one step per button press  
 
----
+### Set Mode – Minutes
+- Clock remains frozen  
+- Minute value increments one step per button press  
 
-## PIN CONSTRAINTS (ZedBoard)
-
-| Signal | Pin |
-|--------|-----|
-| clock | Y9 |
-| reset | P16 |
-| alarm_reset_btn | R18 |
-| snooze_btn | N15 |
-| alarm_led | T22 |
-| buzzer | Y11 |
-| oled_spi_clk | AB12 |
-| oled_spi_data | AA12 |
-| oled_dc_n | U10 |
-| oled_reset_n | U9 |
-| oled_vbat | U11 |
-| oled_vdd | U12 |
+### Exit Set Mode
+- Clock resumes normal operation with updated time  
 
 ---
 
-## FILE STRUCTURE
+## Time-Set State Machine
 
-
----
-
-## VERIFICATION
-The design is verified using:
-- Functional simulation in Vivado
-- On-board testing on ZedBoard
-- Visual validation on OLED
-- Physical verification of LED and buzzer
-
-Test scenarios:
-- Normal time counting
-- Alarm trigger at 00:01:00
-- Alarm reset
-- Snooze and re-trigger after 30 seconds
+| Set Button Press | Mode         | Description          |
+|------------------|--------------|----------------------|
+| 1st Press        | Set Hours    | Adjust hours         |
+| 2nd Press        | Set Minutes  | Adjust minutes       |
+| 3rd Press        | Normal Mode  | Resume clock         |
 
 ---
 
-## ERROR CONDITIONS
+## Alarm & Snooze Operation
 
-### Underflow
-Not applicable (time always valid)
+### Alarm Trigger
+- Alarm activates when current time matches preset alarm time  
+- LED and buzzer toggle at 1 Hz  
 
-### Overflow
-Not applicable (bounded BCD counters)
+### Snooze Function
+- Snooze button stops the alarm  
+- Adds **exactly 30 seconds** to the current time  
+- Snoozed alarm triggers once and then disables snooze  
 
----
-
-## POSSIBLE ENHANCEMENTS
-- User-settable alarm time
-- Multiple alarms
-- Longer snooze intervals
-- Progressive alarm sound
-- Display "SNOOZE" on OLED
-- AM/PM mode
+### Alarm Reset
+- Immediately stops alarm and snooze mode  
 
 ---
 
-## CONCLUSION
-This project demonstrates a complete FPGA-based real-time digital system integrating timekeeping, user interaction, and peripheral control. The design is modular, fully synchronous, and suitable for practical embedded system applications.
+## Timing Table (Example)
+
+| Time      | Event           | State   |
+|-----------|-----------------|---------|
+| 00:00:59 | Clock running   | Normal  |
+| 00:01:00 | Alarm triggers  | Alarm   |
+| 00:01:10 | Snooze pressed  | Snooze  |
+| 00:01:40 | Snooze alarm    | Alarm   |
+| Reset    | Alarm cleared   | Normal  |
 
 ---
 
-## AUTHOR
-Developed by: **velmurugan-vlsi**  
-Platform: Zynq-7000 FPGA  
-Domain: Digital Design / VLSI / FPGA  
+## Verilog Implementation
+
+### Design Files
+- **top.v**  
+  Implements clock generation, time counting, time-setting logic, alarm and snooze control, and OLED interfacing.
+
+- **oledControl.v**  
+  Handles OLED initialization, SPI communication, and display refresh.
 
 ---
 
-## LICENSE
-This project is intended for educational and learning purposes.
+## OLED Display Interface
+- Uses SPI communication  
+- Displays time in **HH:MM:SS** format  
+- Updates once per second  
+- Ensures stable display output without visual artifacts  
+
+---
+
+## Testing & Verification
+- Manual button presses verified on hardware  
+- Time increments correctly without jitter  
+- Alarm and snooze trigger accurately  
+- OLED display remains stable over long runtime  
+
+---
+
+## File Structure
+
+---
+
+## Contributors
+- **Velmurugan R** – Bannari Amman Institute of Technology  
+
+---
+
+## Conclusion
+This project demonstrates a reliable FPGA-based real-time clock system with alarm and snooze functionality. By using synchronized inputs, single-driver control logic, and structured state handling, the design achieves stable operation and clean user interaction.
+
+The project strengthens practical knowledge in FPGA timing, FSM design, alarm scheduling, and OLED interfacing, making it suitable for real-time embedded applications.
+
+---
+
+## Notes
+This project enhanced understanding of:
+- Clock division techniques  
+- Button synchronization and control  
+- Alarm and snooze scheduling logic  
+- OLED SPI communication  
+- Debugging timing and display issues  

@@ -63,7 +63,10 @@ This project solves these challenges using structured Verilog design, synchroniz
 ---
 
 ## Block Diagram
-<img width="1920" height="1080" alt="CLOCK DIVIDER (1)" src="https://github.com/user-attachments/assets/ee6213aa-fdd4-4030-a706-f8990d83e91b" />
+The below block diagrma describes about the workflow of Digital Clock 
+
+<img width="1920" height="1080" alt="CLOCK DIVIDER (2)" src="https://github.com/user-attachments/assets/a22e8ec6-13b8-4631-aad9-847ef8e7f447" />
+
 
 ## Clock Operating Modes
 

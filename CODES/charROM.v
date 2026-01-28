@@ -1,5 +1,8 @@
 `timescale 1ns / 1ps
 
+
+
+
 module charROM(
 input [6:0] addr,
 output [63:0] data 

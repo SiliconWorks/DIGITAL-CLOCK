@@ -33,22 +33,22 @@ FPGA-based real-time clock systems require precise timing generation, safe user 
 - Preventing metastability from mechanical push buttons  
 - Safely modifying time without disrupting clock operation  
 - Implementing alarm and snooze functionality reliably  
-- Maintaining stable OLED display output  
+- Maintaining stable OLED display output using SPI Protocol
 
-This project solves these challenges using structured Verilog design, synchronized control signals, and clean modular architecture.
+This project solves these challenges using structured Verilog design, synchronized control signals, and OLED configuration.
 
 ---
 
 ## Features
 - Accurate **1-second timing** derived from a 100 MHz system clock  
-- Displays real-time **HH:MM:SS** on OLED  
+- Displays real-time **HH:MM:SS** on OLED
+- Stable OLED output 
 - **Manual time setting** using hardware buttons  
 - Freeze-and-set mechanism for safe time adjustment  
 - Increment-by-one hour and minute control  
 - **Alarm function** at preset time  
 - **Snooze function** with exact 30-second delay  
 - Button synchronizers to avoid metastability  
-- Stable OLED output without flicker or corruption  
 - Fully synthesizable and hardware-tested  
 
 ---
@@ -138,10 +138,10 @@ The below block diagrma describes about the workflow of Digital Clock
 ---
 
 ## OLED Display Interface
-- Uses SPI communication  
-- Displays time in **HH:MM:SS** format  
-- Updates once per second  
-- Ensures stable display output without visual artifacts  
+
+**SPI PROTOCOL:**
+
+ SPI (Serial Peripheral Interface) is a fast, synchronous, full-duplex communication protocol used for short-distance data transfer between a master and slave devices. It uses four signals: SCLK, MOSI, MISO, and CS to control data and device selection. Due to its simplicity and high speed, SPI is widely used to connect FPGAs and microcontrollers with peripherals like OLED displays, sensors, and memory chips.
 
 ---
 

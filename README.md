@@ -160,15 +160,15 @@ The below block diagrma describes about the workflow of Digital Clock
 ---
 
 ## Contributors
-- Velmurugan R – Bannari Amman Institute of Technology [LinkedIn link](https://www.linkedin.com/in/velmurugan-r-43b0b2355) [[github](https://github.com/velmurugan-vlsi)]
+- Velmurugan R – Bannari Amman Institute of Technology [[LinkedIn link](https://www.linkedin.com/in/velmurugan-r-43b0b2355)] [[github](https://github.com/velmurugan-vlsi)]
 
 - 
-  Harish P -  Bannari Amman Institute of Technology [LinkedIn link](https://www.linkedin.com/in/harish-p-493476355) [[github](https://github.com/harishee129)]
+  Harish P -  Bannari Amman Institute of Technology [[LinkedIn link](https://www.linkedin.com/in/harish-p-493476355)] [[github](https://github.com/harishee129)]
 
  
-- Durai Murugan M - Bannari Amman Institute of Technology [LinkedIn link](https://www.linkedin.com/in/durai-murugan-859b67354) [[github](https://github.com/duraimurugan9168-svg)]
+- Durai Murugan M - Bannari Amman Institute of Technology [[LinkedIn link](https://www.linkedin.com/in/durai-murugan-859b67354)] [[github](https://github.com/duraimurugan9168-svg)]
  
-- Vasan T  - Bannari Amman Institute of Technology [LinkedIn link](https://www.linkedin.com/in/vasan-t-7225x) [[github](https://github.com/VasanT-7225)]
+- Vasan T  - Bannari Amman Institute of Technology [[LinkedIn link](https://www.linkedin.com/in/vasan-t-7225x)] [[github](https://github.com/VasanT-7225)]
 
 ---
 
